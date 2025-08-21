@@ -43,7 +43,7 @@ La página principal (`/home`) muestra un dashboard con todos los sensores dispo
 * Nombre y ubicación del sensor.
 * Un medidor circular que muestra en tiempo real el porcentaje de la última medición de humedad.
 
-`![Dashboard Principal](img/dashboard.png)`
+![Dashboard Principal](img/dashboard.png)
 
 ### Página de Detalle del Dispositivo
 
@@ -53,13 +53,13 @@ Al hacer clic sobre una tarjeta del dashboard, se navega a la página de detalle
     * **Abrir/Cerrar Riego**: Permite accionar la electroválvula. Al hacerlo, se registra un nuevo log de riego y una nueva medición de humedad simulada.
     * **Ver Historial de Mediciones**: Navega a una vista con todos los registros históricos del sensor.
 
-`![Página de Detalle](img/detalle.png)`
+![Página de Detalle](img/detalle.png)
 
 ### Listado de Mediciones
 
 Esta página muestra un listado completo de todas las mediciones registradas para el sensor seleccionado, ordenadas de la más reciente a la más antigua.
 
-`![Historial de Mediciones](img/historial.png)`
+![Historial de Mediciones](img/historial.png)
 
 ### Servicios y Endpoints de la API
 
