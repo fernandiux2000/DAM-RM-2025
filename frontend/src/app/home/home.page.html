@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Dashboard de Riego</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      @for (d of dispositivos; track d.dispositivoId) {
+        <ion-col size="12" size-md="6" size-lg="4">
+          <ion-card class="device-card" (click)="verDetalle(d.dispositivoId)">
+            <ion-card-header>
+              <ion-card-title>{{d.nombre}}</ion-card-title>
+              <ion-card-subtitle>{{d.ubicacion}}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content class="ion-text-center">
+              <circle-progress
+                [percent]="getHumedadPercent(d)"
+                [radius]="60"
+                [outerStrokeWidth]="10"
+                [innerStrokeWidth]="5"
+                [outerStrokeColor]="'#78C000'"
+                [innerStrokeColor]="'#C7E596'"
+                [animation]="true"
+                [animationDuration]="300"
+                [subtitle]="'Humedad'"
+              ></circle-progress>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ dispositivo?.nombre || 'Cargando...' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (dispositivo) {
+    <div class="ion-padding">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>{{ dispositivo.ubicacion }}</ion-card-subtitle>
+          <ion-card-title>Última Medición de Humedad</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="ion-text-center">
+          <ion-text [appColorHumedad]="dispositivo.ultimaMedicion?.valor">
+            <h1 class="humedad-valor">{{ dispositivo.ultimaMedicion?.valor | porcentaje }}</h1>
+          </ion-text>
+          <p class="fecha-medicion">
+            Fecha:
+            @if (dispositivo.ultimaMedicion?.fecha; as fecha) {
+              <span>{{ fecha | date:'short' }}</span>
+            } @else {
+              <span>Sin registros</span>
+            }
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-button expand="block" (click)="accionarValvula()">
+        <ion-icon slot="start" [name]="isValvulaAbierta ? 'water' : 'water-outline'"></ion-icon>
+        {{ isValvulaAbierta ? 'Cerrar Riego' : 'Abrir Riego' }}
+      </ion-button>
+
+      <ion-button expand="block" fill="outline" (click)="verHistorial()">
+        <ion-icon slot="start" name="analytics-outline"></ion-icon>
+        Ver Historial de Mediciones
+      </ion-button>
+    </div>
+  }
+</ion-content>

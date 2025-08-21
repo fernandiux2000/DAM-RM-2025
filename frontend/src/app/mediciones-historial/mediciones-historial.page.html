@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/dispositivo-detalle/' + dispositivoId"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Historial de Mediciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    @for (m of mediciones; track m.medicionId) {
+      <ion-item>
+        <ion-label>
+          <h2>Humedad: {{ m.valor }}%</h2>
+          <p>{{ m.fecha | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+        </ion-label>
+      </ion-item>
+    }
+  </ion-list>
+
+  @if (mediciones.length === 0) {
+    <div class="ion-padding ion-text-center">
+      <p>No hay mediciones registradas para este dispositivo.</p>
+    </div>
+  }
+</ion-content>

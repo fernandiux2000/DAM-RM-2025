@@ -1,0 +1,32 @@
+ion-content {
+  // Fondo claro, similar al tema por defecto de Ionic
+  --background: #f4f5f8;
+}
+
+.device-card {
+  // Fondo blanco para las tarjetas
+  --background: #ffffff;
+  // Color de texto principal oscuro
+  --color: #444444;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 10px; // Bordes redondeados
+  // Sombra sutil para dar profundidad
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+ion-card-title {
+  // Color de título más oscuro y legible
+  color: #333333;
+  font-weight: bold;
+}
+
+ion-card-subtitle {
+  // Color de subtítulo más suave
+  color: #666666;
+}

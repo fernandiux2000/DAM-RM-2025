@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # Servicio de la Base de Datos
+  db:
+    image: mysql:5.7
+    container_name: dam_mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: DAM
+      MYSQL_USER: user_dam
+      MYSQL_PASSWORD: password_dam
+      MYSQL_ROOT_PASSWORD: root_password_dam
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # Servicio de phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: dam_phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+  # Servicio del backend API
+  backend:
+    build: ./backend
+    container_name: dam_backend_api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: user_dam
+      DB_PASSWORD: password_dam
+      DB_NAME: DAM
+    depends_on:
+      - db
+
+  # Servicio del frontend
+  frontend:
+    build: ./frontend
+    container_name: dam_frontend_app
+    ports:
+      - "8100:8100"
+    volumes:
+      # Sincroniza el código local con el contenedor para tener LIVE RELOAD
+      - ./frontend:/app
+      # Evita que la carpeta node_modules local sobreescriba la del contenedor
+      - /app/node_modules
+    depends_on:
+      - backend
+    deploy:
+      resources:
+        reservations:
+          memory: 4G # Reserva 4GB de RAM para este contenedor
